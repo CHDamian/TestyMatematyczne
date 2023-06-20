@@ -1,0 +1,16 @@
+﻿@page
+@model TestyMatematyczne.Pages.Stworz_TestModel
+@{
+}
+
+
+<div class="text-center">
+    <form method="post">
+        <label asp-for="contestForm.Name"></label>
+        <input asp-for="contestForm.Name" /><br />
+        <label asp-for="contestForm.Difficulty"></label>
+        <select asp-for="contestForm.Difficulty" asp-items="@Model.difficultySelect">
+        </select><br />
+        <button type="submit">Stwórz</button>
+    </form>
+</div>

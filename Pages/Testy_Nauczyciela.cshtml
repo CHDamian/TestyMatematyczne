@@ -1,0 +1,63 @@
+﻿@page
+@model TestyMatematyczne.Pages.Testy_NauczycielaModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Difficulty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Published)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.tests)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Published)
+                    </td>
+                    <td>
+                        <a asp-page="./ZarządzajTestem" asp-route-id="@item.Id">Zarządzaj</a>
+                        @if(!item.Published && item.numberOfTests >= 3)
+                        {
+                            <a asp-page="./OpublikujTest" asp-route-id="@item.Id">Opublikuj</a>
+                        }
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.tests.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.tests.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+
+<a class="nav-link text-dark" asp-area="" asp-page="/Stworz_Test">Nowy test</a>
+

@@ -1,0 +1,40 @@
+﻿@page
+@model TestyMatematyczne.Pages.ZarzadzajTestemModel
+@{
+}
+
+<h3>Nazwa testu: @Model.test.Name</h3> <br />
+<h3>Poziom: @Model.test.Difficulty</h3>
+<br />
+
+
+<b>Dodaj pytanie:</b>
+<br />
+<form method="post">
+    <label asp-for="question.task"></label>
+    <input asp-for="question.task" /><br />
+    <label asp-for="question.hint"></label>
+    <input asp-for="question.hint" /><br />
+    <label asp-for="question.answer"></label>
+    <input asp-for="question.answer" /><br />
+    <button type="submit">Dodaj</button>
+</form>
+<br />
+<b>UWAGA!</b>
+<br />
+<b>Odpowiedź musi być liczbą całkowitą!</b>
+<br />
+<b>Do opublikowania testu potrzebne są co najmniej 3 pytania!</b>
+<br />
+<b>Po opublikowaniu testu nie można już go modyfikować!</b>
+<br />
+<br />
+<b>Pytania:</b>
+<br />
+@foreach (var item in Model.test.Questions)
+{
+    <a>@Html.DisplayFor(modelItem => item)</a>
+    <br />
+}
+
+

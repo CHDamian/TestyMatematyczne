@@ -28,5 +28,9 @@ namespace TestyMatematyczne.Repositories
         {
             return _context.Contest.Where(u => u.Id == id).First();
         }
+        public void UpdateContest(Contest contest)
+        {
+            _context.SaveChanges();
+        }
     }
 }

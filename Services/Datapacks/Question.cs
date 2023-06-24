@@ -8,7 +8,7 @@ namespace TestyMatematyczne.Services.Datapacks
         [Required]
         [Display(Name = "Pytanie")]
         public string task { get; set; }
-        [Required]
+
         [Display(Name = "Podpowiedzi")]
         public string? hint { get; set; }
         [Required]

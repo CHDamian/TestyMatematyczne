@@ -10,6 +10,7 @@ using TestyMatematyczne.Models;
 using TestyMatematyczne.Pages;
 using TestyMatematyczne.Services.Datapacks;
 using TestyMatematyczne.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TestyMatematyczne.Services
 {
@@ -114,13 +115,51 @@ namespace TestyMatematyczne.Services
             foreach(var i in questions)
             {
                 num++;
-                string que = "Pytanie " + num.ToString() + ":";
-                que += i.task + "\n";
-                que += "Podpowiedzi: " + i.hint + "\n";
+                string que = "Pytanie " + num.ToString() + ": ";
+                que += i.task + " | ";
+                if(i.hint != null)
+                {
+                    que += "Podpowiedzi: " + i.hint + " | ";
+                }
                 que += "Odpowiedź: " + i.answer.ToString();
                 testView.Questions.Add(que);
             }
             return testView;
+        }
+
+        public void AddNewQuestionToTest(int testId, Question question)
+        {
+            Contest contest = _contestRepository.GetContest(testId);
+            if (contest.Published) return;
+            List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(contest.Questions);
+            questions.Add(question);
+            contest.Questions = JsonConvert.SerializeObject(questions);
+            _contestRepository.UpdateContest(contest);
+        }
+
+        public int PublishTest(int testId, string id)
+        {
+            var contest = _contestRepository.GetContest(testId);
+            var user = _userRepository.GetUser(id);
+            if(user != contest.Organizer)
+            {
+                return 1;
+            }
+            List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(contest.Questions);
+            if (questions.Count() < 3)
+            {
+                return 2;
+            }
+            contest.Published = true;
+            try
+            {
+                _contestRepository.UpdateContest(contest);
+            }
+            catch (Exception ex)
+            {
+                return 3;
+            }
+            return 0;
         }
 
     }

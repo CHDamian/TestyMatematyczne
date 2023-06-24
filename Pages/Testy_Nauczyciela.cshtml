@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.Published)
                     </td>
                     <td>
-                        <a asp-page="./ZarządzajTestem" asp-route-id="@item.Id">Zarządzaj</a>
+                        <a asp-page="./ZarzadzajTestem" asp-route-id="@item.Id">Zarządzaj</a>
                         @if(!item.Published && item.numberOfTests >= 3)
                         {
                             <a asp-page="./OpublikujTest" asp-route-id="@item.Id">Opublikuj</a>

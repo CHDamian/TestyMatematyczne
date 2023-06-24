@@ -1,0 +1,33 @@
+﻿@page
+@model TestyMatematyczne.Pages.RaportTestuModel
+@{
+}
+
+<h3>Id testu: @Model.raport.testName</h3><br />
+<h3>Użytkownik: @Model.raport.userName</h3><br />
+<h3>Rozwiązano: @Model.raport.solutionDate</h3><br />
+<h3>Wynik: @Model.raport.score</h3>
+<br />
+<br />
+<table>
+	<tr>
+		<th>Nr</th>
+		<th>Odpowiedź</th>
+		<th>Rezultat</th>
+	</tr>
+@for(int i=0; i<Model.raport.answers.Count; i++)
+{
+	<tr>
+		<td>@(i+1)</td>
+		<td>@Model.raport.answers[i].userAnswer</td>
+		@if(Model.raport.answers[i].isCorrect)
+		{
+			<td style="color:green">Dobrze</td>
+		}
+		@if(!Model.raport.answers[i].isCorrect)
+		{
+			<td style="color:red">Źle</td>
+		}
+	</tr>
+}
+</table>

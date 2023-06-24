@@ -1,0 +1,27 @@
+﻿@page
+@model TestyMatematyczne.Pages.RozwiazTestModel
+@{
+}
+
+<h3>Nazwa testu: @Model.test.name</h3>
+<br />
+<br />
+<form method="post">
+    @for (int i = 0; i < Model.test.questions.Count; i++)
+    {
+        <b>Pytanie @(i+1)</b>
+        <a>: @Model.test.questions[i].task</a>
+        <br />
+        @if (Model.test.questions[i].hint != null)
+        {
+            <b>Podpowiedź: </b>
+            <a>@Model.test.questions[i].hint</a>
+            <br />
+        }
+        <label asp-for="answers[i].userAnswer"></label>
+        <input asp-for="answers[i].userAnswer" name="answers[@i].userAnswer" />
+        <br />
+        <br />
+    }
+    <button type="submit">Zakończ test</button>
+</form>

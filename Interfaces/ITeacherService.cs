@@ -12,7 +12,6 @@ namespace TestyMatematyczne.Interfaces
         public List<TeacherTests> getTeacherTests(string id);
         public TestToModify GetTestToModify(int testId, string id);
         public void AddNewQuestionToTest(int testId, Question question);
-
         public int PublishTest(int testId, string id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model TestyMatematyczne.Pages.Testy_NauczycielaModel
+@model TestyMatematyczne.Pages.DostepneTestyModel
 @{
 }
 
@@ -12,33 +12,23 @@
             <th>
                 @Html.DisplayNameFor(model => model.tests[0].Difficulty)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tests[0].Published)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.tests)
         {
-                <tr>
-                    <td>
+            <tr>
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Difficulty)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Published)
-                    </td>
-                    <td>
-                        <a asp-page="./ZarzadzajTestem" asp-route-id="@item.Id">Zarządzaj</a>
-                        @if(!item.Published && item.numberOfTests >= 3)
-                        {
-                            <a asp-page="./OpublikujTest" asp-route-id="@item.Id">Opublikuj</a>
-                        }
-                    </td>
-                </tr>
+                </td>
+                <td>
+                    <a asp-page="./RozwiazTest" asp-route-id="@item.Id">Rozwiąż</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -58,7 +48,3 @@
    class="btn btn-primary @nextDisabled">
     Next
 </a>
-<br />
-<br />
-<a class="nav-link text-dark" asp-area="" asp-page="/Stworz_Test">Nowy test</a>
-

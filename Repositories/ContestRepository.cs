@@ -32,5 +32,10 @@ namespace TestyMatematyczne.Repositories
         {
             _context.SaveChanges();
         }
+
+        public IQueryable<Contest> GetAllPublishedContests()
+        {
+            return _context.Contest.Where(u => u.Published);
+        }
     }
 }

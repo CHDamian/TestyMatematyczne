@@ -9,5 +9,6 @@ namespace TestyMatematyczne.Interfaces
         public IQueryable<Contest> GetAllTeacherContests(string id);
         public Contest GetContest(int id);
         public void UpdateContest(Contest contest);
+        public IQueryable<Contest> GetAllPublishedContests();
     }
 }

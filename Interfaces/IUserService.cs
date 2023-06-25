@@ -11,5 +11,6 @@ namespace TestyMatematyczne.Interfaces
         public List<Answer> PrepareListOfAnswers(int len);
         public DateTime SaveTestSolution(int id, string userId, List<Answer> answers);
         public TestRaport GetTestRaport(int contestId, string userId, DateTime date);
+        public List<UserSolution> GetUserSolutions(string UserId);
     }
 }

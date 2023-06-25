@@ -139,5 +139,24 @@ namespace TestyMatematyczne.Services
 
             return raport;
         }
+
+        public List<UserSolution> GetUserSolutions(string UserId)
+        {
+            var userSolutions = new List<UserSolution>();
+            var user = _userRepository.GetUser(UserId);
+            var solutions = _solutionRepository.GetUserSolutions(user.Id);
+            foreach(var solution in solutions)
+            {
+                var Item = new UserSolution();
+                var contest = _contestRepository.GetContest(solution.ContestId);
+                Item.Name = contest.Name;
+                Item.ContestId = solution.Contest.Id;
+                Item.SolutionDate = solution.SolutionTime;
+                Item.Points = solution.Score;
+                userSolutions.Add(Item);
+            }
+
+            return userSolutions;
+        }
     }
 }

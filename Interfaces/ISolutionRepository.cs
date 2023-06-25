@@ -1,4 +1,5 @@
 ﻿using TestyMatematyczne.Models;
+using TestyMatematyczne.ViewModels;
 
 namespace TestyMatematyczne.Interfaces
 {
@@ -6,5 +7,6 @@ namespace TestyMatematyczne.Interfaces
     {
         public void SaveNewSolution(Solution solution);
         public IQueryable<Solution> GetSolution(int contestId, string userId, DateTime date);
+        public IQueryable<Solution> GetUserSolutions(string UserId);
     }
 }

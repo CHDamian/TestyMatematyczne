@@ -23,5 +23,10 @@ namespace TestyMatematyczne.Repositories
             return _context.Solution.Where(u => u.UserId == userId)
                                     .Where(u => u.ContestId == contestId);
         }
+
+        public IQueryable<Solution> GetUserSolutions(string UserId)
+        {
+            return _context.Solution.Where(u => u.UserId == UserId); 
+        }
     }
 }

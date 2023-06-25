@@ -1,0 +1,56 @@
+﻿@page
+@model TestyMatematyczne.Pages.MojeRozwiazaniaModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].SolutionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Points)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.tests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SolutionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    <a asp-page="./RaportTestu" asp-route-cid="@item.ContestId" asp-route-uid="@User.Identity.Name" asp-route-date="@item.SolutionDate.ToString()">Szczegóły</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.tests.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.tests.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

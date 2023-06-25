@@ -33,6 +33,7 @@ builder.Services.AddTransient<IContestRepository, ContestRepository>();
 builder.Services.AddTransient<ISolutionRepository, SolutionRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITeacherService, TeacherService>();
+builder.Services.AddTransient<IRankingService, RankingService>();
 
 var app = builder.Build();
 

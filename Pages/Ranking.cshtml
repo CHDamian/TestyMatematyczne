@@ -1,0 +1,52 @@
+﻿@page
+@model TestyMatematyczne.Pages.RankingModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tests[0].Points)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.tests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.tests.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.tests.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./History"
+   asp-route-pageIndex="@(Model.tests.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

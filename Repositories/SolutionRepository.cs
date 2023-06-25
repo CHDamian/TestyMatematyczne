@@ -1,6 +1,7 @@
 ﻿using TestyMatematyczne.Data;
 using TestyMatematyczne.Interfaces;
 using TestyMatematyczne.Models;
+using TestyMatematyczne.Repositories.JoinAndGroup;
 
 namespace TestyMatematyczne.Repositories
 {
@@ -27,6 +28,16 @@ namespace TestyMatematyczne.Repositories
         public IQueryable<Solution> GetUserSolutions(string UserId)
         {
             return _context.Solution.Where(u => u.UserId == UserId); 
+        }
+
+        public IOrderedQueryable<Ranked> GetRanked()
+        {
+            return _context.Solution.GroupBy(u => u.UserId)
+                                    .Select(grouped => new Ranked
+                                    {
+                                        UserId = grouped.Key,
+                                        Points = grouped.Sum(u => u.Score)
+                                    }).OrderByDescending(data => data.Points);
         }
     }
 }

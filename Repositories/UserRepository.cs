@@ -16,5 +16,10 @@ namespace TestyMatematyczne.Repositories
         {
             return _context.Users.Where(u => u.Email == id).First();
         }
+
+        public User GetUserById(string id)
+        {
+            return _context.Users.Where(u => u.Id == id).First();
+        }
     }
 }
